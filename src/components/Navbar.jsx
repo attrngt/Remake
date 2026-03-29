@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logoUI from "../assets/logo.png";
+import logoPolar from "../assets/polar-logo.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -58,13 +60,9 @@ const Navbar = () => {
       <nav className="h-[70px] w-full bg-black/40 rounded-full border border-white/10 backdrop-blur-md px-6 md:px-8 flex items-center justify-between shadow-lg">
         {/* 1. LOGO */}
         <Link to="/" className="flex items-center gap-2">
-          <img src="src/assets/logo.png" alt="UI" className="h-8 w-8" />
+          <img src={logoUI} alt="UI" className="h-8 w-8" />
           {/* <span className="font-bold text-2xl text-white tracking-widest">|</span> */}
-          <img
-            src="src/assets/polar-logo.png"
-            alt="Polar"
-            className="h-8 w-fit"
-          />
+          <img src={logoPolar} alt="Polar" className="h-8 w-fit" />
         </Link>
 
         {/* 2. MENU DESKTOP */}
