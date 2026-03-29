@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import LabIN from "../assets/Lab-Polar-In.jpg";
+import VoksView from "../assets/Vokasi-View-1.jpg";
 
 const faqData = {
   "Produksi Media": [
@@ -77,7 +79,7 @@ const Home = () => {
         <section className="relative w-full h-[500px] md:h-screen flex items-center justify-center overflow-hidden bg-black">
           <div
             className="absolute inset-0 w-full h-full z-0 opacity-40 bg-cover bg-center transition-transform duration-1000 scale-105 hover:scale-100"
-            style={{ backgroundImage: "url('src/assets/Lab-Polar-In.jpg')" }}
+            style={{ backgroundImage: `url(${LabIN})` }}
           ></div>
           <div className="relative z-10 text-center px-6">
             <h1 className="text-5xl md:text-8xl font-black text-white tracking-tight uppercase leading-none drop-shadow-2xl">
@@ -121,7 +123,7 @@ const Home = () => {
             <div
               className="absolute w-[320px] h-[450px] md:w-[400px] md:h-[550px] bg-cover bg-center shadow-xl grayscale-[30%] brightness-90"
               style={{
-                backgroundImage: "url('src/assets/Vokasi-View-1.jpg')",
+                backgroundImage: `url(${VoksView})`,
                 borderRadius: "150px 300px 100px 300px",
               }}
             ></div>
