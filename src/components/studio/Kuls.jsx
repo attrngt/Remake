@@ -162,7 +162,7 @@ const Kuls = () => {
         </div>
       </section>
 
-        <KulsCalendar />
+      <KulsCalendar />
 
       <Footer />
     </>

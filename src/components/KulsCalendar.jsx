@@ -58,19 +58,19 @@ const KulsCalendar = () => {
   ];
 
   return (
-    <section className="w-100vw min-h-screen bg-[#FEFFEE] py-20 px-6 flex flex-col items-center">
-      <h2 className="text-5xl font-irish text-[#1A4D2E] mb-12 drop-shadow-sm">
+    <section className="w-full min-h-screen bg-[#FEFFEE] py-20 px-4 sm:px-6 flex flex-col items-center">
+      <h2 className="text-5xl font-bold font-irish text-[#1A4D2E] mb-12 drop-shadow-sm">
         KULS Lecturer
       </h2>
 
       {/* --- GRID KALENDER --- */}
-      <div className="w-[1000px] border-2 border-black bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)] overflow-x-auto">
+      <div className="w-full max-w-[1200px] border-2 border-black bg-white shadow-[10px_10px_0px_rgba(0,0,0,1)] overflow-x-auto">
         {/* Header Nama Hari */}
-        <div className="grid grid-cols-7 border-b-2 border-black">
+        <div className="grid grid-cols-7 min-w-[560px] border-b-2 border-black">
           {dayNames.map((day) => (
             <div
               key={day.full}
-              className="py-3 text-center font-bold text-[10px] sm:text-xs md:text-sm tracking-widest border-r-2 border-black last:border-r-0"
+              className="py-3 text-center font-bold text-[9px] sm:text-[10px] md:text-sm tracking-widest border-r-2 border-black last:border-r-0"
             >
               <span className="inline md:hidden">{day.short}</span>
               <span className="hidden md:inline">{day.full}</span>
@@ -79,7 +79,7 @@ const KulsCalendar = () => {
         </div>
 
         {/* Angka & Kotak Dosen */}
-        <div className="grid grid-cols-7">
+        <div className="grid grid-cols-7 min-w-[560px]">
           {days.map((d, index) => {
             const dosen = dosenData.find((item) => item.day === d);
             const isPurple = [1, 11, 28].includes(d);
