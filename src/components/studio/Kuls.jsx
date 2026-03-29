@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../Footer";
-import memek from "../../assets/sect1.png";
+import section1 from "../../assets/sect1.png";
 import logoKuls from "../../assets/logo-kuls.png";
 import corkboardBg from "../../assets/corkboard-polos.png";
 import fotoTestimoni from "../../assets/testimoni-1.png";
@@ -17,7 +17,7 @@ const Kuls = () => {
         className="section_1 w-full h-screen relative overflow-hidden flex items-center justify-center
         pb-7"
         style={{
-          backgroundImage: `url(${memek})`,
+          backgroundImage: `url(${section1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
