@@ -1,9 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  const isKulsPage = location.pathname === "/peminatan/kuls";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(!isKulsPage);
+
+  useEffect(() => {
+    setShowNavbar(!isKulsPage);
+  }, [isKulsPage]);
+
+  useEffect(() => {
+    if (!isKulsPage) return;
+
+    const handleScroll = () => {
+      setShowNavbar(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isKulsPage]);
 
   const isActive = (path) => location.pathname === path;
   // Khusus untuk mengecek apakah kita sedang di dalam lingkup peminatan
@@ -34,13 +52,19 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4">
+    <header
+      className={`fixed top-4 left-0 right-0 z-50 px-4 transition-opacity duration-500 ease-out ${showNavbar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+    >
       <nav className="h-[70px] w-full bg-black/40 rounded-full border border-white/10 backdrop-blur-md px-6 md:px-8 flex items-center justify-between shadow-lg">
         {/* 1. LOGO */}
         <Link to="/" className="flex items-center gap-2">
           <img src="src/assets/logo.png" alt="UI" className="h-8 w-8" />
           {/* <span className="font-bold text-2xl text-white tracking-widest">|</span> */}
-          <img src="src/assets/polar-logo.png" alt="Polar" className="h-8 w-fit" />
+          <img
+            src="src/assets/polar-logo.png"
+            alt="Polar"
+            className="h-8 w-fit"
+          />
         </Link>
 
         {/* 2. MENU DESKTOP */}

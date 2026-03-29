@@ -5,7 +5,7 @@ import { MdOutlineLocationOn } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2D4096] text-white pt-16 pb-8 px-6 md:px-20">
+    <footer className="bg-[#2D4096] w-auto text-white pt-14 pb-6 px-6 md:px-20">
       <div className="max-w-7xl mx-auto">
         {/* --- GRID UTAMA (3 Kolom) --- */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">

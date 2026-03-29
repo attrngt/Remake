@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Peminatan = () => {
   const listPeminatan = [
@@ -25,6 +26,7 @@ const Peminatan = () => {
   ];
 
   return (
+    <>
     <div className="pt-32 pb-20 px-6 md:px-20 bg-white">
       {/* HEADER DESKRIPSI */}
       <div className="max-w-4xl mb-16">
@@ -70,6 +72,8 @@ const Peminatan = () => {
         ))}
       </div>
     </div>
+    <Footer />
+    </> 
   );
 };
 

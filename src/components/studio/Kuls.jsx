@@ -1,21 +1,172 @@
-import React from 'react'
-import Monopoli from '../Monopoli'
+import React from "react";
+import Footer from "../Footer";
+import memek from "../../assets/sect1.png";
+import logoKuls from "../../assets/logo-kuls.png";
+import corkboardBg from "../../assets/corkboard-polos.png";
+import fotoTestimoni from "../../assets/testimoni-1.png";
+import fotoBeyondScreen from "../../assets/beyond-screen.png";
+import fotoRecap from "../../assets/beyond-recap.png";
+import billboard from "../../assets/billboard.png";
+import section4 from "../../assets/section-4.png";
+import KulsCalendar from "../KulsCalendar";
 
 const Kuls = () => {
   return (
     <>
-    <section className="w-screen h-screen top-0 bg-red-500">
-      {/* <div className="text-4xl mt-20 mx-8 p-4">KULS</div>
-      <div className="text-3xl mt-20 mx-8 p-4">Kuls adalah peminatan di promed</div> */}
-    </section>
-  <section className=''>
+      <section
+        className="section_1 w-full h-screen relative overflow-hidden flex items-center justify-center
+        pb-7"
+        style={{
+          backgroundImage: `url(${memek})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* WRAPPER UTAMA UNTUK LOGO DAN TEKS */}
+        <div className="relative w-full max-w-[1000px] h-[600px] flex items-center justify-center">
+          {/* 1. Teks "Welcome to," (Posisi Atas Tengah) */}
+          <h2 className="absolute top-[10%] left-1/2 -translate-x-1/2 text-white text-4xl md:text-5xl font-['Irish_Grover'] drop-shadow-lg">
+            WELCOME TO
+          </h2>
 
-    <div className='mt-15'>
-      <Monopoli/>
-      </div>
-  </section>
+          {/* 2. Logo KULS (Tengah) */}
+          <div className="relative z-10 w-[650px]">
+            <img
+              src={logoKuls}
+              alt="Logo Kuls"
+              className="w-full h-auto drop-shadow-[5px_5px_5px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          {/* 3. Teks "Get to know us" (Kiri Bawah) */}
+          <h3 className="absolute bottom-0 left-10 md:left-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg">
+            Get to <br /> know us
+          </h3>
+
+          {/* 4. Teks "Play Games" (Kanan Bawah) */}
+          <h3 className="absolute bottom-0 right-10 md:right-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg">
+            Play <br /> Games
+          </h3>
+        </div>
+      </section>
+
+      {/* Section selanjutnya */}
+      <section className="section_2 h-auto w-full bg-[#FEFFEE] flex items-center justify-center text-grey-500 text-4xl font-bold py-10">
+        Halaman Selanjutnya
+      </section>
+
+      <section className="section_3 relative w-full min-h-screen overflow-hidden flex flex-col gap-20 items-center justify-center pt-20 pb-40">
+        {/* 1. BACKGROUND 5 WARNA (Paling Belakang) */}
+        <div className="absolute inset-0 flex w-full h-full -z-10">
+          <div className="flex-1 h-full bg-[#F37021]"></div>
+          <div className="flex-1 h-full bg-[#E58EB5]"></div>
+          <div className="flex-1 h-full bg-[#247B5B]"></div>
+          <div className="flex-1 h-full bg-[#F14624]"></div>
+          <div className="flex-1 h-full bg-[#6259A8]"></div>
+        </div>
+
+        {/* 2. AREA PAPAN (Kontainer Utama) */}
+        <div className="relative w-full max-w-6xl aspect-[16/10] z-10 mx-10 group">
+          {/* GAMBAR PAPAN GABUS (Base Layer) */}
+          <img
+            src={corkboardBg}
+            alt="Board"
+            className="w-full h-full object-contain drop-shadow-2xl"
+          />
+
+          {/* --- KONTEN DI ATAS PAPAN (Gunakan % agar responsif) --- */}
+
+          {/* Memo Teks Kiri Atas */}
+          <div className="absolute top-[10%] left-[7%] w-[35%] p-4 md:p-6 bg-[#FFF9C4] shadow-xl rotate-[-2deg] border-t-4 border-yellow-400">
+            <p className="text-[#1A4D2E] text-justify text-[10px] md:text-sm font-bold leading-tight">
+              KULS Creative merupakan studio yang menjadi wadah kreatif bagi
+              para mahasiswa Produksi Media Universitas Indonesia konsentrasi
+              Periklanan, Media Gig, dan Gamifikasi untuk bersama-sama belajar,
+              berkembang, dan menciptakan proyek & konten kreatif yang positif
+              dan berdampak dari sisi strategi hingga kreatif.
+            </p>
+          </div>
+
+          {/* Foto Beyond Screen (Tengah) */}
+          <div className="absolute top-[8%] left-[45%] w-[25%] p-1 bg-white shadow-2xl rotate-[5deg] hover:rotate-0 transition-transform duration-300">
+            <img
+              src={fotoBeyondScreen}
+              alt="Beyond"
+              className="w-full h-auto"
+            />
+          </div>
+
+          {/* Testimoni Orange (Kanan Atas) */}
+          <div className="absolute top-[12%] right-[7%] w-[22%] p-1 bg-[#F37021] shadow-2xl rotate-[-4deg] border-4 border-[#F37021] hover:rotate-0 transition-transform duration-300">
+            <img src={fotoTestimoni} alt="Testi" className="w-full h-auto" />
+          </div>
+
+          {/* Recap Polkadot (Kanan Tengah) */}
+          <div className="absolute top-[45%] right-[8%] w-[25%] p-2 bg-pink-100 shadow-2xl rotate-[3deg] border-4 border-pink-200 hover:rotate-0 transition-transform duration-300">
+            <img src={fotoRecap} alt="Recap" className="w-full h-auto" />
+          </div>
+
+          {/* Logo KULS Transparan (Hiasan Papan) */}
+          <img
+            src={logoKuls}
+            className="absolute top-0 left-0 w-[19%] pointer-events-none rotate-[-15deg]"
+            alt="deco"
+          />
+        </div>
+        {/* B. DUA PAPAN KECIL (BAWAH) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full h-[400px]">
+          {/* Papan Kecil 1 (Kiri) */}
+          <div className="relative h-full">
+            <img
+              src={corkboardBg}
+              alt="Small Board 1"
+              className="w-full h-full object-cover "
+            />
+          </div>
+
+          {/* Papan Kecil 2 (Kanan) */}
+          <div className="relative h-full">
+            <img
+              src={corkboardBg}
+              alt="Small Board 2"
+              className="w-full h-full object-cover md:-mr-16 ml-auto"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="section_4 w-full min-h-screen relative bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage: `url(${section4})`,
+        }}
+      >
+        <div className="relative z-10 w-full h-full min-h-screen">
+          <img
+            src={billboard}
+            alt="Billboard"
+            className="
+        /* --- MODE MOBILE (Default) --- */
+        absolute 
+        top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+        w-[85%] max-w-[320px] 
+        rounded-[20px] 
+        drop-shadow-2xl
+
+        /* --- MODE LAPTOP (md: ke atas) --- */
+        md:top-[55%] md:left-[10%] md:translate-x-0 md:-translate-y-1/2 
+        md:w-full md:max-w-[540px] 
+        md:rounded-[32px]
+      "
+          />
+        </div>
+      </section>
+
+        <KulsCalendar />
+
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Kuls
+export default Kuls;
