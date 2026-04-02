@@ -9,6 +9,8 @@ import fotoRecap from "../../assets/beyond-recap.png";
 import billboard from "../../assets/billboard.png";
 import section4 from "../../assets/section-4.png";
 import KulsCalendar from "../KulsCalendar";
+import { Link } from "react-router-dom";
+// import HomeGame from "../../pages/HomeGame";
 
 const Kuls = () => {
   return (
@@ -45,14 +47,21 @@ const Kuls = () => {
 
           {/* 4. Teks "Play Games" (Kanan Bawah) */}
           <h3 className="absolute bottom-0 right-10 md:right-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg">
-            Play <br /> Games
+            <Link to="/Home-Game">
+              Play <br /> Games
+            </Link>
           </h3>
         </div>
       </section>
 
       {/* Section selanjutnya */}
-      <section className="section_2 h-auto w-full bg-[#FEFFEE] flex items-center justify-center text-grey-500 text-4xl font-bold py-10">
-        Halaman Selanjutnya
+      <section className="section_2 h-auto w-full bg-[#FEFFEE] flex flex-col items-center justify-center py-5">
+        <div className="text-[#247B5B] text-4xl font-bold py-4">
+          Peminatan Digital Advertising, Gig Media, & Gamification
+        </div>
+        <div className="text-slate-900 text-justify w-full px-24 pb-10 mb-5 font-semibold items-center">
+          Peminatan Digital Advertising, Gig Media, dan Gamifikasi Produksi Media Universitas Indonesia berfokus pada pengembangan keterampilan manajerial dan teknis dalam menciptakan promosi produk, gig media, dan konsep gamifikasi. Mahasiswa di peminatan ini mempelajari berbagai aspek seperti perencanaan konten, analisis brand & produk, konsep aplikasi, dan sebagainya.
+        </div>
       </section>
 
       <section className="section_3 relative w-full min-h-screen overflow-hidden flex flex-col gap-20 items-center justify-center pt-20 pb-40">

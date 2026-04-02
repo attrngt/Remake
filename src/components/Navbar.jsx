@@ -3,15 +3,27 @@ import { Link, useLocation } from "react-router-dom";
 import logoUI from "../assets/logo.png";
 import logoPolar from "../assets/polar-logo.png";
 
-const Navbar = () => {
+const Navbar = ({ forceShow }) => {
+  if (forceShow === false) return null;
+
   const location = useLocation();
   const isKulsPage = location.pathname === "/peminatan/kuls";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(!isKulsPage);
+  const [showNavbar, setShowNavbar] = useState(
+    typeof forceShow === "boolean" ? forceShow : !isKulsPage,
+  );
 
   useEffect(() => {
-    setShowNavbar(!isKulsPage);
-  }, [isKulsPage]);
+    if (isKulsPage) {
+      setShowNavbar(false);
+      return;
+    }
+    if (typeof forceShow === "boolean") {
+      setShowNavbar(forceShow);
+      return;
+    }
+    setShowNavbar(true);
+  }, [forceShow, isKulsPage]);
 
   useEffect(() => {
     if (!isKulsPage) return;
