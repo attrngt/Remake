@@ -1,4 +1,3 @@
-import React from "react";
 import Footer from "../Footer";
 import section1 from "../../assets/sect1.png";
 import logoKuls from "../../assets/logo-kuls.png";
@@ -6,11 +5,23 @@ import corkboardBg from "../../assets/corkboard-polos.png";
 import fotoTestimoni from "../../assets/testimoni-1.png";
 import fotoBeyondScreen from "../../assets/beyond-screen.png";
 import fotoRecap from "../../assets/beyond-recap.png";
-import billboard from "../../assets/billboard.png";
-import section4 from "../../assets/section-4.png";
 import KulsCalendar from "../KulsCalendar";
 import { Link } from "react-router-dom";
-// import HomeGame from "../../pages/HomeGame";
+import top from "../../assets/top.png";
+import HomeGame from "../../pages/HomeGame";
+import Carousel from "../Carousel";
+import c1 from "../../assets/Carousel/c1.png";
+import c2 from "../../assets/Carousel/c2.png";
+import c3 from "../../assets/Carousel/c3.png";
+import c4 from "../../assets/Carousel/c4.png";
+import c5 from "../../assets/Carousel/c5.png";
+import c6 from "../../assets/Carousel/c6.png";
+import c7 from "../../assets/Carousel/c7.png";
+import c8 from "../../assets/Carousel/c8.png";
+import c9 from "../../assets/Carousel/c9.png";
+import c10 from "../../assets/Carousel/c10.png";
+import c11 from "../../assets/Carousel/c11.png";
+import c12 from "../../assets/Carousel/c12.png";
 
 const Kuls = () => {
   return (
@@ -60,7 +71,12 @@ const Kuls = () => {
           Peminatan Digital Advertising, Gig Media, & Gamification
         </div>
         <div className="text-slate-900 text-justify w-full px-24 pb-10 mb-5 font-semibold items-center">
-          Peminatan Digital Advertising, Gig Media, dan Gamifikasi Produksi Media Universitas Indonesia berfokus pada pengembangan keterampilan manajerial dan teknis dalam menciptakan promosi produk, gig media, dan konsep gamifikasi. Mahasiswa di peminatan ini mempelajari berbagai aspek seperti perencanaan konten, analisis brand & produk, konsep aplikasi, dan sebagainya.
+          Peminatan Digital Advertising, Gig Media, dan Gamifikasi Produksi
+          Media Universitas Indonesia berfokus pada pengembangan keterampilan
+          manajerial dan teknis dalam menciptakan promosi produk, gig media, dan
+          konsep gamifikasi. Mahasiswa di peminatan ini mempelajari berbagai
+          aspek seperti perencanaan konten, analisis brand & produk, konsep
+          aplikasi, dan sebagainya.
         </div>
       </section>
 
@@ -144,30 +160,37 @@ const Kuls = () => {
         </div>
       </section>
 
-      <section
-        className="section_4 w-full min-h-screen relative bg-cover bg-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${section4})`,
-        }}
-      >
-        <div className="relative z-10 w-full h-full min-h-screen">
-          <img
-            src={billboard}
-            alt="Billboard"
-            className="
-        /* --- MODE MOBILE (Default) --- */
-        absolute 
-        top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-        w-[85%] max-w-[320px] 
-        rounded-[20px] 
-        drop-shadow-2xl
+      <section className="section_4 w-full min-h-screen relative flex flex-col items-center justify-center bg-[#E58EB5] px-6 py-20 overflow-hidden font-poppins">
+        {/* 1. HEADER AREA - Dibuat lebih menyatu */}
+        <div className="w-full max-w-5xl text-center space-y-4 mb-16">
+          <h3 className="text-white/80 text-lg md:text-6xl font-medium tracking-[0.3em] uppercase">
+            KULSPEEPZ’S FOOTPRINT ACROSS
+          </h3>
 
-        /* --- MODE LAPTOP (md: ke atas) --- */
-        md:top-[55%] md:left-[10%] md:translate-x-0 md:-translate-y-1/2 
-        md:w-full md:max-w-[540px] 
-        md:rounded-[32px]
-      "
+          {/* Gambar "TOP COMPANIES" yang dibuat lebih besar dan center */}
+          <div className="flex justify-center transform hover:scale-105 transition-transform duration-500">
+            <img
+              src={top}
+              alt="Top Companies"
+              className="h-20 md:h-32 w-auto object-contain drop-shadow-2xl"
+            />
+          </div>
+        </div>
+
+        {/* 2. CAROUSEL AREA - Dikasih container biar rapi */}
+        <div className="w-full relative">
+          {/* Sedikit gradasi transparan di pinggir biar carouselnya 'fading' (estetik) */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#E58EB5] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#E58EB5] to-transparent z-10 pointer-events-none"></div>
+
+          <Carousel
+            images={[c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12]}
           />
+        </div>
+
+        {/* 3. DEKORASI TYPE (Opsional: Tulisan transparan di latar) */}
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[15rem] font-black text-white/5 whitespace-nowrap pointer-events-none select-none">
+          FOOTPRINT
         </div>
       </section>
 

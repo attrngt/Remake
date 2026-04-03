@@ -8,9 +8,10 @@ import Peminatan from "./pages/Peminatan";
 import LabDetail from "./pages/LabDetail";
 import HomeGame from "../src/pages/HomeGame";
 import Map from "../src/components/Map";
+import GameDetail from "../src/pages/GameDetail";
 
 function App() {
-  const [navbarVisible, setNavbarVisible] = useState(false);
+  const [navbarVisible, setNavbarVisible] = useState(true);
 
   return (
     <Router>
@@ -33,7 +34,14 @@ function App() {
               />
             }
           />
-          <Route path="/Map" element={<Map />} />
+          <Route
+            path="/Map"
+            element={<Map setNavbarVisible={setNavbarVisible} />}
+          />
+          <Route
+            path="/GameDetail"
+            element={<GameDetail setNavbarVisible={setNavbarVisible} />}
+          />
         </Routes>
       </main>
     </Router>

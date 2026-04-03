@@ -1,0 +1,59 @@
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  cursor: grab;
+  /* Mencegah gambar ikut ter-drag saat manual scroll */
+  user-select: none;
+}
+
+.carousel-container:active {
+  cursor: grabbing;
+}
+
+.carousel-inner {
+  display: flex;
+  white-space: nowrap;
+  /* DURASI TRANSISI: 0.8s dengan cubic-bezier bikin efek 'smooth luxury' */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.carousel-item {
+  flex: 0 0 100%; /* Satu slide makan 100% lebar container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  padding: 0 20px;
+}
+
+.carousel-img {
+  max-width: 80%;
+  max-height: 150px;
+  object-fit: contain;
+  pointer-events: none; /* Biar drag manual lancar gak keganggu image default drag */
+}
+
+/* Dots Styling */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  width: 30px; /* Indikator panjang gaya modern */
+  border-radius: 10px;
+}

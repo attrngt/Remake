@@ -1,46 +1,143 @@
 import React, { useState } from "react";
 
+// Import gambar dosen (Sesuaikan nama file & ekstensi .png / .jpg jika berbeda)
+import imgRangga from "../assets/dosen/1.png";
+import imgBern from "../assets/dosen/2.png";
+import imgNailul from "../assets/dosen/3.png";
+import imgRichard from "../assets/dosen/4.png";
+import imgGabriel from "../assets/dosen/5.png";
+import imgDania from "../assets/dosen/7.png";
+import imgMaulan from "../assets/dosen/11.png";
+import imgGrace from "../assets/dosen/13.png";
+import imgNana from "../assets/dosen/16.png";
+import imgSabila from "../assets/dosen/20.png";
+import imgArtha from "../assets/dosen/22.png";
+import imgEmilia from "../assets/dosen/26.png";
+import imgNicky from "../assets/dosen/28.png";
+import imgJosefhine from "../assets/dosen/30.png";
+import imgNico from "../assets/dosen/12.png";
+
 // Contoh Data Dosen (Bisa Yang Mulia pindahkan ke file JSON/API nanti)
 const dosenData = [
   {
     id: 1,
-    day: 5,
-    name: "Dr. Budi Santoso",
-    matkul: "Creative Advertising",
+    day: 2,
+    name: "Rangga Wisesa, M.I.Kom.",
+    matkul: "Maestro Prodi Promed",
     color: "bg-[#247B5B]",
-    img: "/assets/dosen1.png",
+    img: imgRangga,
   },
   {
     id: 2,
-    day: 14,
-    name: "Siti Aminah, M.Sn",
-    matkul: "Game Design & Gamification",
+    day: 4,
+    name: "Bern Jonathan, M.T.I",
+    matkul: "Data Analytics for Advertising",
     color: "bg-[#6259A8]",
-    img: "/assets/dosen2.png",
+    img: imgBern,
   },
   {
     id: 3,
-    day: 21,
-    name: "Andi Wijaya",
-    matkul: "Media Production",
+    day: 6,
+    name: "Nailul Mona, M.I.Kom.",
+    matkul: "Mentor Kuls Creative",
     color: "bg-[#F37021]",
-    img: "/assets/dosen3.png",
+    img: imgNailul,
   },
   {
     id: 4,
-    day: 23,
-    name: "Rina Kartika",
-    matkul: "Digital Marketing",
+    day: 8,
+    name: "Richard Henokh K, MBA",
+    matkul: "Strategic Brand Management",
     color: "bg-[#E58EB5]",
-    img: "/assets/dosen4.png",
+    img: imgRichard,
   },
   {
     id: 5,
-    day: 26,
-    name: "Prof. Agus",
-    matkul: "Sociology of Media",
+    day: 11,
+    name: "Gabriel Chemin, MBA",
+    matkul: "Music for Advertising & Gig Media",
     color: "bg-[#F14624]",
-    img: "/assets/dosen5.png",
+    img: imgGabriel,
+  },
+  {
+    id: 15,
+    day: 12,
+    name: "Nico Dharmaputra, M.Sc",
+    matkul: "Transmedia-Storytelling",
+    color: "bg-[#E58EB5]",
+    img: imgNico,
+  },
+  {
+    id: 6,
+    day: 16,
+    name: "Dania Rari Pratiwi, M.Sc.",
+    matkul: "Technopreneurship",
+    color: "bg-[#247B5B]",
+    img: imgDania,
+  },
+  {
+    id: 7,
+    day: 14,
+    name: "Maulan Arfi, M.M.",
+    matkul: "Gamification for Advertising & Gig Media",
+    color: "bg-[#6259A8]",
+    img: imgMaulan,
+  },
+  {
+    id: 8,
+    day: 18,
+    name: "Grace Amelia, M.M.",
+    matkul: "Digital Marketing & Analytics",
+    color: "bg-[#F37021]",
+    img: imgGrace,
+  },
+  {
+    id: 9,
+    day: 20,
+    name: "Nana Uli Kuinra, M.I.Kom.",
+    matkul: "Digital CRM",
+    color: "bg-[#E58EB5]",
+    img: imgNana,
+  },
+  {
+    id: 10,
+    day: 22,
+    name: "Sabila Anata, M.Sc.",
+    matkul: "MBKM & Product Development",
+    color: "bg-[#F14624]",
+    img: imgSabila,
+  },
+  {
+    id: 11,
+    day: 24,
+    name: "Artha Hanindito, M.Si.",
+    matkul: "Advertisements Production, Market Research",
+    color: "bg-[#247B5B]",
+    img: imgArtha,
+  },
+  {
+    id: 12,
+    day: 26,
+    name: "Emilia Natarina, M.I.Kom.",
+    matkul: "Copywriting",
+    color: "bg-[#6259A8]",
+    img: imgEmilia,
+  },
+  {
+    id: 13,
+    day: 28,
+    name: "Nicky P. Pandelaki, M.A.",
+    matkul: "AR/VR for Advertising & Gig Media",
+    color: "bg-[#F37021]",
+    img: imgNicky,
+  },
+  {
+    id: 14,
+    day: 30,
+    name: "Josefhine Chitra, M.Sc.",
+    matkul: "Integrated Marketing Communication",
+    color: "bg-[#E58EB5]",
+    img: imgJosefhine,
   },
 ];
 
@@ -59,7 +156,7 @@ const KulsCalendar = () => {
 
   return (
     <section className="w-full min-h-screen bg-[#FEFFEE] py-20 px-4 sm:px-6 flex flex-col items-center">
-      <h2 className="text-5xl font-bold font-irish text-[#1A4D2E] mb-12 drop-shadow-sm">
+      <h2 className="text-5xl font-bold font-['Irish_Grover'] tracking-widest text-[#1A4D2E] mb-12 drop-shadow-sm">
         KULS Lecturer
       </h2>
 
@@ -82,7 +179,7 @@ const KulsCalendar = () => {
         <div className="grid grid-cols-7 min-w-[560px]">
           {days.map((d, index) => {
             const dosen = dosenData.find((item) => item.day === d);
-            const isPurple = [1, 11, 28].includes(d);
+            const isPurple = [8, 11, 28].includes(d);
 
             return (
               <div

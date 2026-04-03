@@ -11,6 +11,7 @@ const avatars = [
 
 const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
   const [playerCount, setPlayerCount] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State baru untuk custom dropdown
   const [step, setStep] = useState("select");
   const [players, setPlayers] = useState([]);
   const [activePlayer, setActivePlayer] = useState(0);
@@ -18,6 +19,8 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
   const [warningMessage, setWarningMessage] = useState("");
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
   const [avatarSlot, setAvatarSlot] = useState(0);
+
+  const navigate = useNavigate();
 
   const openWarning = (message) => {
     setWarningMessage(message);
@@ -28,7 +31,7 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
 
   const handlePlayClick = () => {
     if (!playerCount) {
-      openWarning("Pilih jumlah pemain dulu sebelum lanjut.");
+      openWarning("Pilih jumlah pemain dulu di menu sebelah tombol Play.");
       return;
     }
 
@@ -67,8 +70,6 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
     setAvatarModalOpen(false);
   };
 
-  const navigate = useNavigate();
-
   const canStart =
     players.length > 0 &&
     players.every(
@@ -88,82 +89,106 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
     }));
 
     localStorage.setItem("homeGamePlayers", JSON.stringify(storagePlayers));
+
+    // Hapus memori state map sebelumnya agar permainan dimulai benar-benar baru
+    localStorage.removeItem("kulsMapState");
+
     navigate("/Map", { state: { players } });
   };
 
-  const selectedPlayer = players[activePlayer] || {};
   const toggleNavbar = () => setNavbarVisible(!navbarVisible);
 
   return (
     <>
       <div
-        className={`relative min-h-screen w-full bg-slate-100 flex flex-col items-center gap-6 px-6 pb-6 ${navbarVisible ? "pt-24" : "pt-6"}`}
+        className={`relative min-h-screen w-full overflow-hidden flex flex-col items-center gap-6 px-6 pb-6 ${
+          navbarVisible ? "pt-24" : "pt-6"
+        } font-poppins`}
       >
+        {/* --- 1. BACKGROUND WAVY SVG --- */}
+        <div className="absolute inset-0 -z-10">
+          <svg
+            className="absolute top-0 left-0 w-full h-full"
+            viewBox="0 0 1000 500"
+            preserveAspectRatio="none"
+          >
+            {/* Base Orange */}
+            <path d="M0,0 L1000,0 L1000,500 L0,500 Z" fill="#F37021" />
+            {/* Pink Wave */}
+            <path
+              d="M245,0 C260,150 150,250 100,350 C50,450 150,500 340,500 L0,500 L0,0 Z"
+              fill="#E58EB5"
+            />
+            {/* Red Wave */}
+            <path
+              d="M340,500 C150,500 50,450 100,350 C150,250 260,150 245,0 L500,0 C480,150 550,250 600,350 C650,450 550,500 340,500 Z"
+              fill="#F14624"
+            />
+            {/* Purple Wave */}
+            <path
+              d="M1000,0 L800,0 C820,150 750,250 700,350 C650,450 750,500 1000,500 Z"
+              fill="#6259A8"
+            />
+          </svg>
+        </div>
+
+        {/* --- 2. MODALS --- */}
         {warningOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4 py-6">
-            <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    Perhatian
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-600">
-                    {warningMessage}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 flex justify-end">
-                <button
-                  type="button"
-                  onClick={closeWarning}
-                  className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
-                >
-                  Tutup
-                </button>
-              </div>
+            <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl text-center">
+              <h3 className="text-2xl font-black text-red-500 mb-4">
+                Perhatian!
+              </h3>
+              <p className="text-slate-600 font-medium mb-6">
+                {warningMessage}
+              </p>
+              <button
+                type="button"
+                onClick={closeWarning}
+                className="w-full rounded-full bg-[#2e8555] px-5 py-3 text-lg font-bold text-white hover:brightness-110"
+              >
+                Tutup
+              </button>
             </div>
           </div>
         )}
 
         {avatarModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4 py-6">
-            <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl">
-              <div className="flex items-start justify-between gap-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4 py-6 backdrop-blur-sm">
+            <div className="w-full max-w-lg rounded-[2.5rem] bg-white p-8 shadow-2xl">
+              <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    Popup Avatar Pemain {avatarSlot + 1}
+                  <h3 className="text-2xl font-black text-[#2e8555]">
+                    Avatar Pemain {avatarSlot + 1}
                   </h3>
-                  <p className="mt-2 text-sm text-slate-500">
-                    Pilih salah satu avatar dari menu ini.
+                  <p className="mt-1 text-sm text-slate-500">
+                    Pilih salah satu avatar di bawah ini.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setAvatarModalOpen(false)}
-                  className="text-slate-400 hover:text-slate-700"
+                  className="text-slate-400 hover:text-slate-700 text-3xl font-bold leading-none"
                 >
                   ×
                 </button>
               </div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 max-h-[60vh] overflow-y-auto">
                 {avatars.map((avatar) => (
                   <button
                     key={avatar.id}
                     type="button"
                     onClick={() => handleAvatarSelect(avatar)}
-                    className="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:border-blue-400"
+                    className="flex items-center gap-4 rounded-3xl border-2 border-slate-100 bg-white p-4 text-left transition hover:border-[#2e8555] hover:bg-slate-50"
                   >
                     <div
-                      className={`h-14 w-14 rounded-full ${avatar.color} flex items-center justify-center text-sm font-semibold text-white`}
+                      className={`h-14 w-14 rounded-full ${avatar.color} flex items-center justify-center text-lg font-bold text-white shadow-md`}
                     >
                       {avatar.label.slice(-1)}
                     </div>
                     <div>
-                      <p className="font-semibold text-slate-900">
-                        {avatar.label}
-                      </p>
-                      <p className="text-xs text-slate-500">Pilih avatar ini</p>
+                      <p className="font-bold text-slate-900">{avatar.label}</p>
                     </div>
                   </button>
                 ))}
@@ -172,154 +197,167 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
           </div>
         )}
 
+        {/* --- 3. KONTEN UTAMA --- */}
         {step === "select" ? (
-          <div className="flex flex-col items-center gap-10 text-center">
-            <div>
-              <h1 className="text-5xl font-bold text-slate-900">KULSTOPIA</h1>
-              <p className="mt-4 max-w-2xl text-lg text-slate-600">
-                Pilih jumlah pemain terlebih dahulu agar tombol Play bisa
-                digunakan. Setelah itu kamu akan diarahkan ke halaman untuk
-                memasukkan nama dan memilih avatar.
-              </p>
-            </div>
+          <div className="flex flex-col items-center gap-7 text-center relative z-10 pt-7">
+            {/* Judul KULSTOPIA */}
+            <h1 className="text-8xl md:text-[11rem] font-irish text-[#247B5B] drop-shadow-[10px_10px_0px_white] tracking-tighter leading-none transform -rotate-2 font-['Irish_Grover']">
+              KULSTOPIA
+            </h1>
 
-            <div className="w-full max-w-md rounded-3xl bg-slate-50 p-8 shadow-sm">
-              <div className="mb-4 flex justify-between items-center gap-3">
-                <span className="text-sm font-semibold text-slate-700">
-                  Jumlah Pemain
-                </span>
-              </div>
-              <select
-                value={playerCount}
-                onChange={(event) => setPlayerCount(event.target.value)}
-                className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-              >
-                <option value="">Pilih jumlah pemain</option>
-                <option value="1">1 Pemain</option>
-                <option value="2">2 Pemain</option>
-                <option value="3">3 Pemain</option>
-              </select>
-            </div>
+            {/* CUSTOM DROPDOWN & PLAY KAPSUL */}
+            <div className="relative flex flex-col items-center z-20">
+              <div className="inline-flex items-center bg-[#cfcfcf] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.2)] p-1.5 border-[3px] border-white/20">
+                {/* Tombol Play */}
+                <button
+                  onClick={handlePlayClick}
+                  className="bg-[#fcfcfc] text-[#2e8555] font-['Irish_Grover'] text-4xl px-12 py-2 rounded-full shadow-sm hover:brightness-95 active:scale-95 transition-all"
+                >
+                  PLAY
+                </button>
 
-            <button
-              type="button"
-              onClick={handlePlayClick}
-              className={`inline-flex items-center justify-center rounded-full px-10 py-4 text-lg font-semibold text-white transition ${
-                playerCount
-                  ? "bg-blue-600 hover:bg-blue-700"
-                  : "bg-slate-400 cursor-default"
-              }`}
-            >
-              Play
-            </button>
-          </div>
-        ) : (
-          <div className="flex w-full justify-center">
-            <div className="w-full max-w-5xl space-y-8">
-              <div className="flex flex-col items-center gap-4">
-                <div className="text-center">
-                  <h2 className="text-4xl font-bold text-slate-900">
-                    Pengaturan Pemain
-                  </h2>
-                  <p className="mt-2 text-sm text-slate-500">
-                    Masukkan nama dan pilih avatar untuk setiap pemain.
-                  </p>
+                {/* Area Klik Chevron */}
+                <div
+                  className="px-6 cursor-pointer text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-center"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-8 w-8 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={4}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
                 </div>
               </div>
 
-              <div className="grid w-full gap-6 justify-items-center md:grid-cols-2 lg:grid-cols-3">
+              {/* Menu List Dropdown */}
+              {isDropdownOpen && (
+                <div className="absolute top-full mt-2 right-0 md:-right-12 w-56 bg-white rounded-4xl shadow-2xl overflow-y-auto flex flex-col border border-slate-100 animate-fadeIn max-h-52">
+                  {[1, 2, 3].map((num, index) => (
+                    <button
+                      key={num}
+                      type="button"
+                      onClick={() => {
+                        setPlayerCount(num.toString());
+                        setIsDropdownOpen(false);
+                      }}
+                      className={`py-3 px-4 text-center text-xl font-bold transition-colors ${
+                        playerCount === num.toString()
+                          ? "bg-slate-100 text-[#2e8555]"
+                          : "text-black hover:bg-slate-50"
+                      } ${index !== 7 ? "border-b border-slate-200" : ""}`}
+                    >
+                      {num} Player
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Indikator Pilihan (Biar user tahu sudah milih) */}
+              {playerCount && !isDropdownOpen && (
+                <div className="mt-6 px-6 py-2 bg-white/90 backdrop-blur-sm rounded-full font-bold text-[#2e8555] shadow-md border-2 border-white text-sm">
+                  ✓ {playerCount} Pemain Dipilih
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="flex w-full justify-center relative z-10">
+            <div className="w-full max-w-5xl space-y-8 bg-white/20 backdrop-blur-xl p-8 md:p-12 rounded-[3rem] border-4 border-white/30 shadow-2xl">
+              <div className="flex flex-col items-center gap-4 text-center">
+                <h2 className="text-5xl font-irish text-white drop-shadow-md">
+                  PENGATURAN PEMAIN
+                </h2>
+              </div>
+
+              <div className="grid w-full gap-8 justify-items-center md:grid-cols-2 lg:grid-cols-3">
                 {players.map((player, index) => (
                   <div
                     key={player.id}
-                    className={`w-full max-w-sm rounded-3xl border p-6 ${
+                    className={`w-full max-w-sm rounded-[2.5rem] border-4 p-8 transition-all ${
                       activePlayer === index
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-slate-200 bg-white"
+                        ? "border-[#2e8555] bg-white scale-105 shadow-xl"
+                        : "border-transparent bg-white/90 opacity-90"
                     }`}
                   >
-                    <div className="flex flex-col items-center gap-4 text-center">
-                      <div className="flex h-24 w-24 items-center justify-center rounded-full border border-slate-300 bg-slate-100 text-xs font-semibold uppercase text-slate-500">
-                        {player.avatar ? player.avatar.label : "Avatar"}
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-600">
-                          Pemain {index + 1}
-                        </p>
-                        <p className="mt-1 text-xs text-slate-400">
-                          {activePlayer === index
-                            ? "Sedang dipilih"
-                            : "Klik untuk aktifkan"}
-                        </p>
-                      </div>
-
+                    <div className="flex flex-col items-center gap-6 text-center">
                       <button
                         type="button"
                         onClick={() => {
                           setActivePlayer(index);
                           openAvatarModal(index);
                         }}
-                        className="rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200 hover:bg-slate-200"
+                        className={`h-24 w-24 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-white font-bold text-2xl transition hover:scale-110 ${player.avatar ? player.avatar.color : "bg-slate-300 animate-pulse"}`}
                       >
-                        Pilih Avatar
+                        {player.avatar ? player.avatar.label.slice(-1) : "?"}
                       </button>
 
-                      <input
-                        type="text"
-                        value={player.name}
-                        onChange={(event) =>
-                          handlePlayerNameChange(index, event.target.value)
-                        }
-                        placeholder="Masukkan nama"
-                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                      />
+                      <div className="w-full">
+                        <p className="text-xs font-black tracking-widest uppercase text-slate-400 mb-2">
+                          Pemain {index + 1}
+                        </p>
+                        <input
+                          type="text"
+                          value={player.name}
+                          onChange={(event) =>
+                            handlePlayerNameChange(index, event.target.value)
+                          }
+                          placeholder="NAMA KAMU"
+                          className="w-full text-center bg-transparent border-b-4 border-slate-200 py-2 text-xl font-bold text-slate-800 outline-none transition focus:border-[#2e8555] placeholder:text-slate-300"
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="flex flex-col gap-4 border-t border-slate-200 pt-6 text-slate-600">
-                <p className="text-sm">
-                  Setelah semua pemain memilih nama dan avatar, tekan Start.
-                </p>
+              <div className="flex flex-col gap-6 pt-8 items-center">
                 <button
                   type="button"
                   onClick={handleStartClick}
-                  className={`inline-flex items-center justify-center rounded-full px-8 py-3 text-base font-semibold text-white transition ${
+                  className={`inline-flex items-center justify-center rounded-full px-16 py-4 text-2xl font-['irish_grover'] text-white shadow-xl transition-all ${
                     canStart
-                      ? "bg-blue-600 hover:bg-blue-700"
-                      : "bg-slate-300 text-slate-600"
+                      ? "bg-[#2e8555] hover:scale-105"
+                      : "bg-slate-400 opacity-70 cursor-not-allowed"
                   }`}
                 >
-                  Start
+                  START !
                 </button>
               </div>
             </div>
           </div>
         )}
-        <div className="w-full max-w-5xl flex flex-wrap justify-center gap-3">
+
+        {/* --- 4. FOOTER BUTTONS --- */}
+        <div className="w-full max-w-5xl flex flex-wrap justify-center gap-4 relative z-10 mt-4">
           {step === "setup" && (
             <button
               type="button"
               onClick={() => setStep("select")}
-              className="rounded-full border border-slate-300 px-5 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="rounded-full border-2 border-white/40 bg-white/20 backdrop-blur-md px-6 py-3 text-sm font-bold text-white hover:bg-white/40 transition"
             >
-              Kembali
+              Reset Pemain
             </button>
           )}
+        </div>
+
+        {/* tombol kecil "kembali ke kuls" di bawah */}
+        {step === "select" && (
           <Link
             to="/peminatan/kuls"
-            className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="fixed bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-white/40 bg-white/70 px-4 py-2 text-xs font-semibold text-[#2e8555] shadow-lg backdrop-blur-sm hover:bg-white transition "
           >
             Kembali ke Kuls
           </Link>
-          <button
-            type="button"
-            onClick={toggleNavbar}
-            className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Toggle Navbar
-          </button>
-        </div>
+        )}
       </div>
     </>
   );
