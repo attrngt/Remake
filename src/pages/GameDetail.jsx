@@ -9,8 +9,8 @@ const GameDetail = ({ setNavbarVisible }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Menangkap data yang dikirim otomatis dari Map.jsx
-  const { gameType, playerName, tileIndex } = location.state || {};
+  // 1. TANGKAP DATA 'players' DARI MAP
+  const { gameType, playerName, tileIndex, players } = location.state || {};
 
   // Menyembunyikan navbar saat masuk ke arena Minigame
   useEffect(() => {
@@ -22,19 +22,13 @@ const GameDetail = ({ setNavbarVisible }) => {
     }
   }, [setNavbarVisible]);
 
-  // Fungsi ini akan dipanggil oleh minigame saat game-nya sudah selesai
   const handleChallengeDone = (score) => {
-    // Di sini Yang Mulia bisa tambahkan logika untuk simpan skor ke state/localStorage
-    console.log(`${playerName} menyelesaikan game dan mendapat skor: ${score}`);
-
-    // Setelah selesai, otomatis tendang balik ke Peta
     navigate("/Map");
   };
 
   // --- LOGIKA PANGGILAN KOMPONEN (THE SWITCHER) ---
 
   if (gameType === "sing_the_jingle") {
-    // Layar akan 100% diambil alih oleh JingleChallenge
     return (
       <JingleChallenge
         playerName={playerName || "Pemain"}
@@ -44,14 +38,32 @@ const GameDetail = ({ setNavbarVisible }) => {
   }
 
   if (gameType === "link_it_up") {
-    // Layar akan 100% diambil alih oleh LinkItUp (kalau sudah dibuat)
     return (
+      // 2. KIRIM DATA 'players' KE LINK IT UP
       <LinkItUp
-        playerName={playerName || "Pemain"}
+        players={players} 
         onChallengeDone={handleChallengeDone}
       />
     );
   }
+
+  // 3. FALLBACK RETURN (PENCEGAH LAYAR NYANGKUT/CRASH)
+  return (
+    <div className="min-h-screen bg-[#FFFDF0] flex flex-col items-center justify-center p-6 font-poppins">
+      <div className="bg-white p-10 rounded-[3rem] shadow-2xl text-center border-4 border-red-500">
+        <h1 className="text-4xl font-black text-red-500 mb-4">WADUH! 🚨</h1>
+        <p className="text-xl text-slate-600 font-semibold mb-8">
+          Sistem kebingungan mencari game. Mari kita kembali ke Map!
+        </p>
+        <button
+          onClick={() => navigate("/Map")}
+          className="bg-slate-800 text-white px-8 py-4 rounded-full font-bold text-xl hover:scale-105 transition-all"
+        >
+          Kembali ke Peta
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default GameDetail;

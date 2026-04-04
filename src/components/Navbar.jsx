@@ -29,7 +29,7 @@ const Navbar = ({ forceShow }) => {
     if (!isKulsPage) return;
 
     const handleScroll = () => {
-      setShowNavbar(window.scrollY > 40);
+      setShowNavbar(window.scrollY > 600);
     };
 
     window.addEventListener("scroll", handleScroll);

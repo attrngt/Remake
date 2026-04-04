@@ -10,6 +10,8 @@ const JingleChallenge = ({ playerName = "Player 1", onChallengeDone }) => {
   const [videoId, setVideoId] = useState("");
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [showScoreScreen, setShowScoreScreen] = useState(false);
+  // State baru untuk mengontrol Pop Up Instruksi
+  const [showIntroModal, setShowIntroModal] = useState(true);
 
   useEffect(() => {
     const randomVideo =
@@ -36,11 +38,59 @@ const JingleChallenge = ({ playerName = "Player 1", onChallengeDone }) => {
   const titleColors = ["#F37021", "#E58EB5", "#F14624", "#247B5B", "#6259A8"];
   const titleText = "SING THE JINGLE".split("");
 
+  // Warna khusus untuk tombol NEXT agar sesuai gambar
+  const nextColors = ["#F37021", "#247B5B", "#F14624", "#6259A8"];
+
   return (
-    <div className="h-full w-full bg-[#FFFDF0] flex flex-col items-center justify-center font-poppins relative overflow-hidden p-6">
-      {/* 1. LAYAR UTAMA */}
+    <div className="min-h-screen w-full bg-[#FFFDF0] flex flex-col items-center justify-center font-poppins relative overflow-hidden p-6">
+      {/* --- MODAL INSTRUKSI (POP UP AWAL) --- */}
+      {showIntroModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#FFFDF0] p-6 animate-fadeIn">
+          {/* Tombol X untuk menutup */}
+          <button
+            onClick={() => setShowIntroModal(false)}
+            className="absolute top-8 right-10 text-4xl font-black text-slate-800 hover:scale-110 hover:text-red-500 transition-all z-10"
+          >
+            ✕
+          </button>
+
+          <div className="w-full max-w-5xl flex flex-col items-center">
+            {/* Judul Warna-Warni */}
+            <div className="flex flex-wrap justify-center gap-1 mb-12">
+              {titleText.map((char, index) => {
+                if (char === " ") return <span key={index} className="w-4" />;
+                const color = titleColors[index % titleColors.length];
+                return (
+                  <span
+                    key={index}
+                    className="text-6xl md:text-8xl font-['Irish_Grover'] font-black inline-block transform rotate-2 drop-shadow-[3px_3px_0px_#222]"
+                    style={{ color: color }}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
+            </div>
+
+            {/* Banner Pink Instruksi */}
+            <div
+              className="w-full bg-[#E58EB5] py-16 px-8 md:px-12 flex items-center justify-center shadow-lg"
+              style={{
+                clipPath:
+                  "polygon(40px 0, calc(100% - 40px) 0, 100% 40px, 100% calc(100% - 40px), calc(100% - 40px) 100%, 40px 100%, 0 calc(100% - 40px), 0 40px)",
+              }}
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-white text-center tracking-widest uppercase">
+                JUST SING THE TUNE !
+              </h2>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- 1. LAYAR UTAMA --- */}
       <div
-        className={`w-full max-w-5xl flex flex-col items-center transition-all duration-500 ${showScoreScreen ? "scale-90 opacity-0" : "scale-100 opacity-100"}`}
+        className={`w-full max-w-5xl flex flex-col items-center transition-all duration-500 ${showScoreScreen ? "scale-90 opacity-0" : "scale-100 opacity-100"} ${showIntroModal ? "hidden" : "flex"}`}
       >
         {/* Judul Warna-Warni */}
         <div className="flex flex-wrap justify-center gap-1 mb-8">
@@ -61,15 +111,17 @@ const JingleChallenge = ({ playerName = "Player 1", onChallengeDone }) => {
 
         {/* Video Player (Iframe) */}
         <div className="w-full max-w-[700px] aspect-video bg-black rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white relative">
-          <iframe
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1`}
-            title="Jingle Video"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            className="absolute top-0 left-0 w-full h-full"
-          ></iframe>
+          {!showIntroModal && ( // Render video hanya jika modal intro sudah ditutup agar tidak autoplay duluan
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1`}
+              title="Jingle Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              className="absolute top-0 left-0 w-full h-full"
+            ></iframe>
+          )}
         </div>
 
         {/* Tombol Selesai (Trigger Manual) */}
@@ -81,7 +133,7 @@ const JingleChallenge = ({ playerName = "Player 1", onChallengeDone }) => {
         </button>
       </div>
 
-      {/* 2. MODAL EVALUASI */}
+      {/* --- 2. MODAL EVALUASI --- */}
       {isEvaluating && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm">
           <div className="bg-white p-10 rounded-[3rem] shadow-2xl text-center max-w-sm mx-4">
@@ -106,7 +158,7 @@ const JingleChallenge = ({ playerName = "Player 1", onChallengeDone }) => {
         </div>
       )}
 
-      {/* 3. LAYAR SKOR (PERBAIKAN STYLE SESUAI GAMBAR KEDUA) */}
+      {/* --- 3. LAYAR SKOR --- */}
       {showScoreScreen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center">
           <div className="absolute inset-0 bg-[#F37021]">

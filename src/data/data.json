@@ -1,0 +1,124 @@
+{
+  "dosen": [
+    {
+      "id": 1,
+      "day": 2,
+      "name": "Rangga Wisesa, M.I.Kom.",
+      "matkul": "Maestro Prodi Promed",
+      "color": "bg-[#247B5B]",
+      "img": "/assets/dosen/rangga.png"
+    },
+    {
+      "id": 2,
+      "day": 4,
+      "name": "Bern Jonathan, M.T.I",
+      "matkul": "Data Analytics for Advertising",
+      "color": "bg-[#6259A8]",
+      "img": "/assets/dosen/bern.png"
+    },
+    {
+      "id": 3,
+      "day": 6,
+      "name": "Nailul Mona, M.I.Kom.",
+      "matkul": "Mentor Kuls Creative",
+      "color": "bg-[#F37021]",
+      "img": "/assets/dosen/nailul.png"
+    },
+    {
+      "id": 4,
+      "day": 8,
+      "name": "Richard Henokh K, MBA",
+      "matkul": "Strategic Brand Management",
+      "color": "bg-[#E58EB5]",
+      "img": "/assets/dosen/richard.png"
+    },
+    {
+      "id": 5,
+      "day": 11,
+      "name": "Gabriel Chemin, MBA",
+      "matkul": "Music for Advertising & Gig Media",
+      "color": "bg-[#F14624]",
+      "img": "/assets/dosen/gabriel.png"
+    },
+    {
+      "id": 15,
+      "day": 12,
+      "name": "Nico Dharmaputra, M.Sc",
+      "matkul": "Transmedia-Storytelling",
+      "color": "bg-[#E58EB5]",
+      "img": "/assets/dosen/nico.png"
+    },
+    {
+      "id": 6,
+      "day": 16,
+      "name": "Dania Rari Pratiwi, M.Sc.",
+      "matkul": "Technopreneurship",
+      "color": "bg-[#247B5B]",
+      "img": "/assets/dosen/dania.png"
+    },
+    {
+      "id": 7,
+      "day": 14,
+      "name": "Maulan Arfi, M.M.",
+      "matkul": "Gamification for Advertising & Gig Media",
+      "color": "bg-[#6259A8]",
+      "img": "/assets/dosen/maulan.png"
+    },
+    {
+      "id": 8,
+      "day": 18,
+      "name": "Grace Amelia, M.M.",
+      "matkul": "Digital Marketing & Analytics",
+      "color": "bg-[#F37021]",
+      "img": "/assets/dosen/grace.png"
+    },
+    {
+      "id": 9,
+      "day": 20,
+      "name": "Nana Uli Kuinra, M.I.Kom.",
+      "matkul": "Digital CRM",
+      "color": "bg-[#E58EB5]",
+      "img": "/assets/dosen/nana.png"
+    },
+    {
+      "id": 10,
+      "day": 22,
+      "name": "Sabila Anata, M.Sc.",
+      "matkul": "MBKM & Product Development",
+      "color": "bg-[#F14624]",
+      "img": "/assets/dosen/sabila.png"
+    },
+    {
+      "id": 11,
+      "day": 24,
+      "name": "Artha Hanindito, M.Si.",
+      "matkul": "Advertisements Production, Market Research",
+      "color": "bg-[#247B5B]",
+      "img": "/assets/dosen/artha.png"
+    },
+    {
+      "id": 12,
+      "day": 26,
+      "name": "Emilia Natarina, M.I.Kom.",
+      "matkul": "Copywriting",
+      "color": "bg-[#6259A8]",
+      "img": "/assets/dosen/emilia.png"
+    },
+    {
+      "id": 13,
+      "day": 28,
+      "name": "Nicky P. Pandelaki, M.A.",
+      "matkul": "AR/VR for Advertising & Gig Media",
+      "color": "bg-[#F37021]",
+      "img": "/assets/dosen/nicky.png"
+    },
+    {
+      "id": 14,
+      "day": 30,
+      "name": "Josefhine Chitra, M.Sc.",
+      "matkul": "Integrated Marketing Communication",
+      "color": "bg-[#E58EB5]",
+      "img": "/assets/dosen/josefhine.png"
+    }
+  ]
+}

@@ -24,6 +24,12 @@ import c11 from "../../assets/Carousel/c11.png";
 import c12 from "../../assets/Carousel/c12.png";
 
 const Kuls = () => {
+  const handleScrollToSection = () => {
+    const section = document.getElementById("section_2");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" }); // "smooth" bikin efek meluncurnya pelan dan elegan
+    }
+  };
   return (
     <>
       <section
@@ -52,13 +58,16 @@ const Kuls = () => {
           </div>
 
           {/* 3. Teks "Get to know us" (Kiri Bawah) */}
-          <h3 className="absolute bottom-0 left-10 md:left-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg">
+          <h3
+            className="absolute bottom-0 left-10 md:left-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg cursor-pointer"
+            onClick={handleScrollToSection}
+          >
             Get to <br /> know us
           </h3>
 
           {/* 4. Teks "Play Games" (Kanan Bawah) */}
-          <h3 className="absolute bottom-0 right-10 md:right-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg">
-            <Link to="/Home-Game">
+          <h3 className="absolute bottom-0 right-10 md:right-20 text-white text-3xl md:text-5xl font-['Irish_Grover'] text-center leading-tight drop-shadow-lg animate-bounce transition-all duration-200 active:scale-95 cursor-pointer">
+            <Link to="/Home-Game" className="block">
               Play <br /> Games
             </Link>
           </h3>
@@ -66,7 +75,10 @@ const Kuls = () => {
       </section>
 
       {/* Section selanjutnya */}
-      <section className="section_2 h-auto w-full bg-[#FEFFEE] flex flex-col items-center justify-center py-5">
+      <section
+        id="section_2"
+        className="section_2 h-auto w-full bg-[#FEFFEE] flex flex-col items-center justify-center py-5"
+      >
         <div className="text-[#247B5B] text-4xl font-bold py-4">
           Peminatan Digital Advertising, Gig Media, & Gamification
         </div>
