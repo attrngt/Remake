@@ -96,7 +96,7 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
     navigate("/Map", { state: { players } });
   };
 
-  const toggleNavbar = () => setNavbarVisible(!navbarVisible);
+  const toggleNavbar = () => setNavbarVisible(!navbarVisible)
 
   return (
     <>
@@ -359,8 +359,9 @@ const HomeGame = ({ navbarVisible, setNavbarVisible }) => {
           </Link>
         )}
       </div>
+      
     </>
   );
-};
+};;
 
 export default HomeGame;

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import LabIN from "../assets/Lab-Polar-In.jpg";
 import VoksView from "../assets/Vokasi-View-1.jpg";
+import NavGuideModal from "../components/NavGuideModal";
+
 
 const faqData = {
   "Produksi Media": [
@@ -74,6 +76,7 @@ const Home = () => {
 
   return (
     <>
+    <NavGuideModal/>
       <div className="w-full min-h-screen bg-gray-50 text-gray-800 font-sans">
         {/* 1. HERO SECTION */}
         <section className="relative w-full h-[500px] md:h-screen flex items-center justify-center overflow-hidden bg-black">

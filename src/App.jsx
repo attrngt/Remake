@@ -9,6 +9,7 @@ import LabDetail from "./pages/LabDetail";
 import HomeGame from "../src/pages/HomeGame";
 import Map from "../src/components/Map";
 import GameDetail from "../src/pages/GameDetail";
+import LeaderboardFinal from "../src/components/LeaderboardFinal";
 
 function App() {
   const [navbarVisible, setNavbarVisible] = useState(true);
@@ -42,6 +43,7 @@ function App() {
             path="/GameDetail"
             element={<GameDetail setNavbarVisible={setNavbarVisible} />}
           />
+          <Route path="/leaderboard" element={<LeaderboardFinal />} />
         </Routes>
       </main>
     </Router>

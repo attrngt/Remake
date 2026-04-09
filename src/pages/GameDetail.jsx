@@ -10,7 +10,8 @@ const GameDetail = ({ setNavbarVisible }) => {
   const navigate = useNavigate();
 
   // 1. TANGKAP DATA 'players' DARI MAP
-  const { gameType, playerName, tileIndex, players } = location.state || {};
+  const { gameType, playerId, playerName, tileIndex, players } =
+    location.state || {};
 
   // Menyembunyikan navbar saat masuk ke arena Minigame
   useEffect(() => {
@@ -23,7 +24,9 @@ const GameDetail = ({ setNavbarVisible }) => {
   }, [setNavbarVisible]);
 
   const handleChallengeDone = (score) => {
-    navigate("/Map");
+    navigate("/Map", {
+      state: { gameResult: score, gameType, playerId, playerName },
+    });
   };
 
   // --- LOGIKA PANGGILAN KOMPONEN (THE SWITCHER) ---
@@ -40,10 +43,7 @@ const GameDetail = ({ setNavbarVisible }) => {
   if (gameType === "link_it_up") {
     return (
       // 2. KIRIM DATA 'players' KE LINK IT UP
-      <LinkItUp
-        players={players} 
-        onChallengeDone={handleChallengeDone}
-      />
+      <LinkItUp players={players} onChallengeDone={handleChallengeDone} />
     );
   }
 
